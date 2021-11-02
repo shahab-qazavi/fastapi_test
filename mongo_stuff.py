@@ -5,7 +5,9 @@ from PrintException import PrintException as prEx
 
 def db_worker(collection):
     try:
-        db = MongoClient()[collection]
+        con = MongoClient()
+        con.server_info()
+        db = con[collection]
     except:
         subprocess.call(['sudo', 'service', 'mongod', 'restart'])
         db = MongoClient()[collection]
